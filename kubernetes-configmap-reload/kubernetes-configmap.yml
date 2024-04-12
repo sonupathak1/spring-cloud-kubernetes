@@ -28,4 +28,5 @@ spec:
     spec:
       containers:
         - name: kubernetes-configmap-reload
+          imagePullPolicy: Always
           image: sonupathak/kubernetes-configmap-reload:latest
