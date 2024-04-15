@@ -68,7 +68,7 @@ pipeline {
 			}
 	        steps {
 	            sh 'echo ${WORKSPACE}'
-	            sh 'eksctl create -f ${WORKSPACE}/kubernetes-configmap-reload/kubernetes-configmap.yml'
+	            sh 'kubectl create -f ${WORKSPACE}/kubernetes-configmap-reload/kubernetes-configmap.yml'
 	        }
 	    }
 	    stage ("wait_for_pods"){
@@ -81,8 +81,8 @@ pipeline {
 		stage("rollback deployment") {
 	        steps {	            	         	           
 	              sh """
-	                   eksctl delete deploy ${params.AppName}
-					    eksctl delete svc ${params.AppName}
+	                   kubectl delete deploy ${params.AppName}
+					    kubectl delete svc ${params.AppName}
 				  """	       
 	        }
 	    }
