@@ -68,7 +68,7 @@ pipeline {
 	                        variable: 'KUBECONFIG')]) {
 	                        sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl"'  
                             sh 'chmod u+x ./kubectl'  
-	                        sh 'eksctl create -f kubernetes-configmap.yml'
+	                        sh 'kubectl create -f kubernetes-configmap.yml'
 	                    }
 	                }
 	            }
@@ -86,8 +86,8 @@ pipeline {
 	               withCredentials([kubeconfigContent(credentialsId: 'kubernetes_config', 
 	                        variable: 'KUBECONFIG')]) {
 	               sh """
-	                    eksctlctl delete deploy ${params.AppName}
-					    eksctl delete svc ${params.AppName}
+	                    kubectl delete deploy ${params.AppName}
+					    kubectl delete svc ${params.AppName}
 				   """
 	               }
 	            }
